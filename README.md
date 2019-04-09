@@ -7,6 +7,11 @@ https://github.com/gregnb/react-to-print/issues/107
 
 Problem: The module tries to print a second blank page.
 
+# Issue #115
+https://github.com/gregnb/react-to-print/issues/115
+
+I'm using the version '2.0.0-alpha.7' instead '2.1.0' cause I have tha same bug found in issue #115
+
 
 # Steps to reproduce the print problem
 
