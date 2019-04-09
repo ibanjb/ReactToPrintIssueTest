@@ -31,6 +31,11 @@ In the upper section will see a huge blue button with the text "Print test !!!",
 
 ![print test](./src/assets/readme.png)
 
+# One more thing (another bug maybe?)
+
+Another bug (?) that I found is about the radio and check buttons. In Google Chrome are printed good but in Firefox doesn't. I don't know if will be better to create another issue related with that or not.. 
+
+![another bug](./src/assets/readmeOther.png)
 
 # Thanks
 
