@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'dva';
-import { Card, Button, Row, Col, Icon, Menu, Dropdown } from 'antd';
+import { Modal, Card, Button, Row, Col, Icon, Menu, Dropdown } from 'antd';
 import ReactToPrint from 'react-to-print';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
@@ -8,6 +8,7 @@ import styles from './Analysis.less';
 import PageLoading from '@/components/PageLoading';
 import PrintForm from '@/components/PrintTest';
 import CanvasTest from '@/components/CanvasTest';
+import Easter from '@/components/Easter';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
@@ -61,6 +62,7 @@ class Analysis extends Component {
     salesType: 'all',
     currentTabKey: '',
     rangePickerValue: getTimeDistance('year'),
+    visibility: false,
   };
 
   componentDidMount() {
@@ -129,8 +131,16 @@ class Analysis extends Component {
     return '';
   };
 
+  onClick = () => {
+    this.setState({ visibility: true });
+  };
+
+  onCancel = () => {
+    this.setState({ visibility: false });
+  };
+
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
+    const { rangePickerValue, salesType, currentTabKey, visibility } = this.state;
     const { chart, loading } = this.props;
     const {
       visitData,
@@ -178,6 +188,28 @@ class Analysis extends Component {
             )}
             content={() => this.componentRef}
           />
+          <Button
+            onClick={this.onClick}
+            style={{ marginLeft: '24px' }}
+            type="primary"
+            shape="round"
+            icon="experiment"
+            size="small"
+          >
+            Easter egg
+          </Button>
+          <Modal
+            title="Use the cursors or press ESC to close"
+            style={{ minWidth: '450px' }}
+            centered
+            destroyOnClose
+            visible={visibility}
+            onCancel={this.onCancel}
+            footer={[]}
+          >
+            <Easter />
+          </Modal>
+
           <div style={{ display: 'none' }}>
             <PrintForm ref={el => (this.componentRef = el)} />
           </div>
