@@ -1,18 +1,56 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'dva';
-import { Button, Row, Col, Icon, Menu, Dropdown } from 'antd';
+import { Card, Button, Row, Col, Icon, Menu, Dropdown } from 'antd';
 import ReactToPrint from 'react-to-print';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
 import styles from './Analysis.less';
 import PageLoading from '@/components/PageLoading';
 import PrintForm from '@/components/PrintTest';
+import CanvasTest from '@/components/CanvasTest';
 
 const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
 const SalesCard = React.lazy(() => import('./SalesCard'));
 const TopSearch = React.lazy(() => import('./TopSearch'));
 const ProportionSales = React.lazy(() => import('./ProportionSales'));
 const OfflineData = React.lazy(() => import('./OfflineData'));
+const mockCoordinates = [
+  { id: 1, type: 'S', coords: [{ x: 323, y: 220 }] },
+  { id: 2, type: 'P', coords: [{ x: 319, y: 134 }] },
+  { id: 3, type: 'N', coords: [{ x: 116, y: 188 }] },
+  { id: 4, type: 'Circle', coords: [{ x: 265, y: 145 }, { x: 325, y: 220 }] },
+  { id: 5, type: 'Circle', coords: [{ x: 87, y: 168 }, { x: 112, y: 197 }] },
+  {
+    id: 6,
+    type: 'Line',
+    coords: [
+      { x: 343, y: 149 },
+      { x: 340, y: 162 },
+      { x: 333, y: 177 },
+      { x: 328, y: 188 },
+      { x: 327, y: 189 },
+      { x: 326, y: 192 },
+    ],
+  },
+  {
+    id: 7,
+    type: 'Line',
+    coords: [
+      { x: 269, y: 126 },
+      { x: 278, y: 126 },
+      { x: 271, y: 126 },
+      { x: 272, y: 126 },
+      { x: 273, y: 126 },
+      { x: 274, y: 126 },
+      { x: 275, y: 126 },
+      { x: 276, y: 126 },
+      { x: 277, y: 126 },
+      { x: 278, y: 126 },
+      { x: 277, y: 126 },
+      { x: 276, y: 126 },
+    ],
+  },
+];
 
 @connect(({ chart, loading }) => ({
   chart,
@@ -144,6 +182,14 @@ class Analysis extends Component {
             <PrintForm ref={el => (this.componentRef = el)} />
           </div>
         </div>
+
+        <Card style={{ marginBottom: '24px' }}>
+          <h3>Canvas test</h3>
+          <div style={{ margin: '24px' }}>
+            <CanvasTest coordinates={mockCoordinates} disabled={false} />
+          </div>
+        </Card>
+
         <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={visitData} />
         </Suspense>
